@@ -11,6 +11,7 @@
 	autocrlf = input
 	filemode = true
 	logallrefupdates = true
+	editor = vim
 
 [branch]
 	autosetupmerge = true
