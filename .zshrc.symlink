@@ -8,8 +8,6 @@ if [[ $UID -eq 0 ]]; then
 	export PROMPT='%m%B%%%b '
 fi
 
-export DOTFILES=~/.dotfiles
-
 export HISTFILE=$HOME/.history
 export HISTSIZE=100000
 export SAVEHIST=100000
@@ -24,18 +22,8 @@ export LC_MESSAGES=en_US.UTF-8
 export PERL_BADLANG=0
 unset LC_ALL
 
-
 path=(~/bin /usr/local/sbin /usr/local/bin /bin /sbin/ /usr/bin/ /usr/sbin/ $path)
 typeset -U path
-
-for file ($DOTFILES/**.zsh) source $file 2>/dev/null
-for file ($DOTFILES/**/*.zsh) source $file 2>/dev/null
-
-# load every completion after autocomplete loads
-#for config_file ($DOTFILES/**/completion.sh) source $config_file
-
-
-
 
 if [[ $- == *i* ]]; then
 	alias grep='grep --color'
