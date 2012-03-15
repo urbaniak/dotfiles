@@ -1,0 +1,60 @@
+[user]
+	name = Krzysztof Urbaniak
+	email = urban@fail.pl
+
+[apply]
+	whitespace = fix
+
+[core]
+	excludesfile = ~/.gitignore
+	whitespace = space-before-tab,trailing-space,indent-with-non-tab,cr-at-eol
+	autocrlf = input
+	filemode = true
+	logallrefupdates = true
+
+[branch]
+	autosetupmerge = true
+
+[diff]
+	renames = copies
+	mnemonicprefix = true
+
+[push]
+	default = current
+
+[alias]
+	a    = commit --amend
+	b    = checkout -b
+	co = checkout
+	c    = commit
+	ca   = commit -a
+	dh   = diff HEAD^
+	dm   = diff master
+	lg   = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+	msg  = commit --allow-empty -m ''
+	remaster = rebase master
+	rei  = rebase -i master
+	sb   = status -sb
+	unstage = reset HEAD --
+	st = status
+	ci = commit
+	br = branch
+	last = log -1 HEAD
+
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+
+[rerere]
+	enabled = 1
+
+[github]
+	user = urban69
+
+[url "git@github.com:"]
+	insteadOf = "gh:"
+	pushInsteadOf = "github:"
+	pushInsteadOf = "git://github.com/"
+[url "git://github.com/"]
+	insteadOf = "github:"

@@ -1,0 +1,12 @@
+filetype off
+
+set foldmethod=indent
+set foldlevel=99
+
+syntax on                           " syntax highlighing
+filetype on                          " try to detect filetypes
+filetype plugin indent on    " enable loading indent file for filetype
+
+let g:pyflakes_use_quickfix = 0
+
+let g:pep8_map='<leader>8'

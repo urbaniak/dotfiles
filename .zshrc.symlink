@@ -1,0 +1,136 @@
+# ZSH Configuration
+
+
+export PROMPT='%n@%B%m%b> '
+export RPROMPT='%~ '
+
+if [[ $UID -eq 0 ]]; then
+	export PROMPT='%m%B%%%b '
+fi
+
+export DOTFILES=~/.dotfiles
+
+export HISTFILE=$HOME/.history
+export HISTSIZE=100000
+export SAVEHIST=100000
+
+export LANG=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
+export LC_NUMERIC=en_US.UTF-8
+export LC_TIME=en_US.UTF-8
+export LC_COLLATE=en_US.UTF-8
+export LC_MONETARY=en_US.UTF-8
+export LC_MESSAGES=en_US.UTF-8
+export PERL_BADLANG=0
+unset LC_ALL
+
+
+path=(~/bin /usr/local/sbin /usr/local/bin /bin /sbin/ /usr/bin/ /usr/sbin/ $path)
+typeset -U path
+
+for file ($DOTFILES/**.zsh) source $file 2>/dev/null
+for file ($DOTFILES/**/*.zsh) source $file 2>/dev/null
+
+# load every completion after autocomplete loads
+#for config_file ($DOTFILES/**/completion.sh) source $config_file
+
+
+
+
+if [[ $- == *i* ]]; then
+	alias grep='grep --color'
+	alias cls='clear'
+	alias sc='screen -r'
+	alias mc='mc -d -c'
+	alias mcedit='mcedit -d -c'
+
+	alias delpyc="find . -name '*.pyc' -delete"
+	alias delds="find . -name '.DS_Store' -delete"
+
+	alias sizes='du -h -d1'
+
+	alias find-empty-folders='find . -depth -type d -empty'
+	alias kill-empty-folders='find . -depth -type d -empty -exec rmdir "{}" \;'
+
+	alias rainbow='for color in {000..255}; do echo -n "\e[38;5;${color}m ${color} \e[0m";	done'
+
+	autoload compinit
+	compinit -c
+
+	zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+	zstyle ':completion::complete:*' use-cache 1
+	zstyle ':completion:*:(all-|)files' ignored-patterns '(|*/)CVS'
+	zstyle ':completion:*:cd:*' ignored-patterns '(*/)#CVS'
+
+	setopt APPEND_HISTORY
+	setopt INC_APPEND_HISTORY
+	setopt NO_BEEP
+	setopt hist_ignore_space
+	setopt list_packed
+	setopt transient_rprompt
+	setopt HIST_IGNORE_DUPS
+	setopt HIST_FIND_NO_DUPS
+
+	setopt appendhistory
+	setopt sharehistory
+	setopt incappendhistory
+
+	bindkey '^[[A' up-line-or-search
+	bindkey '^[[B' down-line-or-search
+	bindkey ' ' magic-space
+	bindkey '^K' kill-region
+	bindkey '^A' beginning-of-line
+	bindkey '^E' end-of-line
+	bindkey '^L' clear-screen
+	bindkey '^H' backward-delete-char
+	bindkey '^?' backward-delete-char
+	bindkey '^[[3~' delete-char
+	bindkey '^[[2~' overwrite-mode
+
+	bindkey "\e[H" beginning-of-line
+	bindkey "\e[F" end-of-line
+
+	bindkey '\e[7~' beginning-of-line
+	bindkey '\e[8~' end-of-line
+
+	bindkey '^[[1~' beginning-of-line
+	bindkey '^[[4~' end-of-line
+
+	bindkey '^[[H' beginning-of-line
+	bindkey '^[[F' end-of-line
+
+	bindkey '^[OH' beginning-of-line
+	bindkey '^[OF' end-of-line
+	bindkey '^[O5H' beginning-of-line
+	bindkey '^[O5F' end-of-line
+
+	autoload -Uz vcs_info
+
+	zstyle ':vcs_info:*' stagedstr '%F{28}●'
+	zstyle ':vcs_info:*' unstagedstr '%F{11}●'
+	zstyle ':vcs_info:*' check-for-changes true
+	zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{11}%r'
+	zstyle ':vcs_info:*' enable git svn
+	precmd() {
+
+		case $TERM in
+			*xterm*|*rxvt*)
+				print -Pn "\e]2;%n@%m:%~\a"
+			;;
+		esac
+
+		if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
+			zstyle ':vcs_info:*' formats ' %F{green}%b%c%u %F{15}'
+		} else {
+			zstyle ':vcs_info:*' formats ' %F{green}%b%c%u%F{red}● %F{15}'
+		}
+
+		vcs_info
+	}
+
+	setopt prompt_subst
+	setopt promptsubst
+
+	autoload -U promptinit
+	promptinit
+fi
