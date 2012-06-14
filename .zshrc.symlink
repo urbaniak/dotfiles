@@ -25,6 +25,9 @@ unset LC_ALL
 path=(~/bin /usr/local/sbin /usr/local/bin /bin /sbin /usr/bin /usr/sbin $path)
 typeset -U path
 
+fpath=($fpath ~/.zsh/func)
+typeset -U fpath
+
 if [[ $- == *i* ]]; then
 	alias grep='grep --color'
 	alias cls='clear'
