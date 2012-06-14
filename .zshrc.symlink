@@ -25,7 +25,7 @@ unset LC_ALL
 path=(~/bin /usr/local/sbin /usr/local/bin /bin /sbin /usr/bin /usr/sbin $path)
 typeset -U path
 
-fpath=($fpath ~/.zsh/func)
+fpath=($fpath ~/.zsh/functions)
 typeset -U fpath
 
 if [[ $- == *i* ]]; then
