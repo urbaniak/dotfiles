@@ -122,3 +122,5 @@ if [[ $- == *i* ]]; then
 	autoload -U promptinit
 	promptinit
 fi
+
+[[ -e ~/.profile ]] && source ~/.profile
