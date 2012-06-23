@@ -66,7 +66,6 @@ editor_option_typewriter_wrap=0
 editor_edit_confirm_save=1
 editor_syntax_highlighting=1
 nice_rotating_dash=1
-horizontal_split=0
 eight_bit_clean=1
 full_eight_bits=0
 chdir_other_panel=1
@@ -117,9 +116,25 @@ ignore_ftp_chattr_errors=true
 
 editor_group_undo=0
 
+preallocate_space=0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 [Layout]
-equal_split=1
-first_panel_size=87
 message_visible=0
 keybar_visible=0
 xterm_title=0
@@ -133,6 +148,28 @@ command_prompt_type=2
 free_space=0
 
 classic_progressbar=true
+
+horizontal_split=0
+vertical_equal=1
+left_panel_size=68
+horizontal_equal=1
+top_panel_size=87
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 [Misc]
 ftpfs_password=anonymous@

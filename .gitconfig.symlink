@@ -41,6 +41,7 @@
 	ci = commit
 	br = branch
 	last = log -1 HEAD
+	lol = log --decorate --pretty=oneline --abbrev-commit --all
 
 [color]
 	diff = auto
