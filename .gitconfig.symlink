@@ -24,24 +24,18 @@
 	default = current
 
 [alias]
-	a    = commit --amend
-	b    = checkout -b
 	co = checkout
-	c    = commit
-	ca   = commit -a
-	dh   = diff HEAD^
-	dm   = diff master
-	lg   = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
-	msg  = commit --allow-empty -m ''
-	remaster = rebase master
-	rei  = rebase -i master
-	sb   = status -sb
+	dh = diff HEAD^
+	dm = diff master
+	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+	sb = status -sb
 	unstage = reset HEAD --
 	st = status
 	ci = commit
 	br = branch
 	last = log -1 HEAD
 	lol = log --decorate --pretty=oneline --abbrev-commit --all
+	cleanup = !git branch --merged master | grep -v 'master$' | xargs git branch -d
 
 [color]
 	diff = auto
@@ -50,11 +44,3 @@
 
 [rerere]
 	enabled = 1
-
-[url "git@github.com:"]
-	insteadOf = "gh:"
-	pushInsteadOf = "github:"
-	pushInsteadOf = "git://github.com/"
-
-[url "git://github.com/"]
-	insteadOf = "github:"

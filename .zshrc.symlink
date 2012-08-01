@@ -31,7 +31,7 @@ typeset -U fpath
 if [[ $- == *i* ]]; then
 	alias grep='grep --color'
 	alias cls='clear'
-	alias sc='screen -r'
+	alias sc='tmux attach'
 	alias mc='mc -d -c'
 	alias mcedit='mcedit -d -c'
 
