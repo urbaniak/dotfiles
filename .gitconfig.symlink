@@ -44,3 +44,9 @@
 
 [rerere]
 	enabled = 1
+
+[log]
+  date = relative
+
+[format]
+    pretty = format:"%Cred%h%Creset %an - %s (%Cgreen%ad%Creset)"
