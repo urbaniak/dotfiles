@@ -8,6 +8,8 @@ if [[ $UID -eq 0 ]]; then
 	export PROMPT='%m%B%%%b%f '
 fi
 
+export CLICOLOR=1
+
 export HISTFILE=$HOME/.history
 export HISTSIZE=100000
 export SAVEHIST=100000
