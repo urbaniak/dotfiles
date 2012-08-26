@@ -2,7 +2,7 @@
 
 
 export PROMPT='%n@%B%m%b%f> '
-export RPROMPT='${vcs_info_msg_0_}%~ '
+export RPROMPT='${vcs_info_msg_0_}%b%f%~ '
 
 if [[ $UID -eq 0 ]]; then
 	export PROMPT='%m%B%%%b%f '
