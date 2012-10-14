@@ -1,6 +1,5 @@
 # ZSH Configuration
 
-
 export PROMPT='%n@%B%m%b%f> '
 export RPROMPT='${vcs_info_msg_0_}%b%f%~ '
 
@@ -44,11 +43,6 @@ if [[ $- == *i* ]]; then
 	alias delpyc="find . -name '*.pyc' -delete"
 	alias delds="find . -name '.DS_Store' -delete"
 
-	alias sizes='du -h -d1'
-
-	alias find-empty-folders='find . -depth -type d -empty'
-	alias kill-empty-folders='find . -depth -type d -empty -exec rmdir "{}" \;'
-
 	alias rainbow='for color in {000..255}; do echo -n "\e[38;5;${color}m ${color} \e[0m";	done'
 
 	autoload compinit
@@ -56,8 +50,7 @@ if [[ $- == *i* ]]; then
 
 	zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 	zstyle ':completion::complete:*' use-cache 1
-	zstyle ':completion:*:(all-|)files' ignored-patterns '(|*/)CVS'
-	zstyle ':completion:*:cd:*' ignored-patterns '(*/)#CVS'
+	zstyle ':completion:*' menu select
 
 	setopt APPEND_HISTORY
 	setopt INC_APPEND_HISTORY
