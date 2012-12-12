@@ -5,3 +5,6 @@
 *.orig
 .svn
 .hg
+django.log
+db
+.pydevproject
