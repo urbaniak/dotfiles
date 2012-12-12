@@ -52,15 +52,12 @@ if [[ $- == *i* ]]; then
 	zstyle ':completion::complete:*' use-cache 1
 	zstyle ':completion:*' menu select
 
-	setopt APPEND_HISTORY
-	setopt INC_APPEND_HISTORY
-	setopt NO_BEEP
-	setopt hist_ignore_space
+	setopt nobeep
 	setopt list_packed
 	setopt transient_rprompt
-	setopt HIST_IGNORE_DUPS
-	setopt HIST_FIND_NO_DUPS
-
+	setopt hist_ignore_dups
+	setopt hist_find_no_dups
+	setopt hist_ignore_space
 	setopt appendhistory
 	setopt sharehistory
 	setopt incappendhistory
