@@ -14,13 +14,13 @@ modified = re.compile('^(?:M|A)(\s+)(?P<name>.*)')
 CHECKS = [
 	{
 		'output': 'Checking for pdbs...',
-		'command': 'grep -n "import pdb" %s',
+		'command': 'ack "import pdb" %s',
 		'match_files': ['.*\.py$'],
 		'print_filename': True,
 	},
 	{
 		'output': 'Checking for ipdbs...',
-		'command': 'grep -n "import ipdb" %s',
+		'command': 'ack "import ipdb" %s',
 		'match_files': ['.*\.py$'],
 		'print_filename': True,
 	},
@@ -39,13 +39,13 @@ CHECKS = [
 	},
 	{
 		'output': 'Checking for alert()...',
-		'command': 'grep -n alert %s',
+		'command': 'ack alert %s',
 		'match_files': ['.*\.js$'],
 		'print_filename': True,
 	},
 	{
 		'output': 'Checking for debugger...',
-		'command': 'grep -n debugger %s',
+		'command': 'ack debugger %s',
 		'match_files': ['.*\.js$'],
 		'print_filename': True,
 	},
@@ -56,22 +56,10 @@ CHECKS = [
 		'print_filename': False,
 	},
 	{
-		'output': 'Running Pyflakes...',
-		'command': 'pyflakes %s',
+		'output': 'Running flake8...',
+		'command': 'flake8 --ignore=W191,E501,E121,E122,E123 %s',	 # 191 is tabs, 501 is line too long, E121 is indention is not multiple of four
 		'match_files': ['.*\.py$'],
 		'print_filename': False,
-	},
-	{
-		'output': 'Running pep8...',
-		'command': 'pep8 -r --ignore=W191,E501 %s',	 # 191 is tabs, 501 is line too long
-		'match_files': ['.*\.py$'],
-		'print_filename': False,
-	},
-	{
-		'output': 'Checking for Sass changes...',
-		'command': 'sass --quiet --update %s',
-		'match_files': ['.*\.scss$'],
-		'print_filename': True,
 	},
 ]
 
@@ -114,6 +102,7 @@ def main(all_files):
 	else:
 		p = subprocess.Popen(['git', 'status', '--porcelain'], stdout=subprocess.PIPE)
 		out, err = p.communicate()
+		print out
 		for line in out.splitlines():
 			match = modified.match(line)
 			if match:
@@ -124,19 +113,6 @@ def main(all_files):
 	if all_files or len(files) > 0:
 		for check in CHECKS:
 			result = check_files(files, check) or result
-
-		subprocess.call(['git', 'stash', '-u', '--keep-index'], stdout=subprocess.PIPE)
-
-		managepy = glob.glob('manage2.py') + glob.glob('*/manage2.py')
-		if len(managepy) > 0:
-			process = subprocess.Popen("python %s test" % managepy[0], stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
-			out, err = process.communicate()
-
-			if err:
-				print "Django tests error:\n%s\n%s" % (out, err)
-				result = 1
-
-		subprocess.call(['git', 'stash', 'pop', '-q'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
 	sys.exit(result)
 
