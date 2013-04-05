@@ -1,0 +1,6 @@
+[global]
+download-cache = ~/.pip/download_cache
+build = ~/.pip/build
+
+[install]
+use-mirrors = true
