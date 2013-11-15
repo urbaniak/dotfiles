@@ -106,11 +106,7 @@ if [[ $- == *i* ]]; then
 			;;
 		esac
 
-		if [[ -z $(git ls-files --other --exclude-standard 2> /dev/null) ]] {
-			zstyle ':vcs_info:*' formats ' %F{green}%b%c%u %F{15}'
-		} else {
-			zstyle ':vcs_info:*' formats ' %F{green}%b%c%u%F{red}● %F{15}'
-		}
+		zstyle ':vcs_info:*' formats ' %F{green}%b%c%u %F{15}'
 
 		vcs_info
 	}
