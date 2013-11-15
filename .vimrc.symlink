@@ -3,10 +3,11 @@ filetype plugin indent on
 
 syntax on
 
-colorscheme molokai
+colorscheme wombat256
 
-set guifont=Monaco:h11
-set noantialias
+set guifont=Menlo:h11
+"set noantialias
+set guioptions-=r
 
 set nocompatible
 
@@ -48,7 +49,7 @@ vnoremap <tab> %
 set wrap
 set textwidth=79
 set formatoptions=qrn1
-set colorcolumn=85
+"set colorcolumn=85
 
 set list
 set listchars=tab:▸\ ,eol:¬
