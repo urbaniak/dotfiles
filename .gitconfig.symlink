@@ -7,7 +7,7 @@
 
 [core]
 	excludesfile = ~/.gitignore
-	whitespace = space-before-tab,trailing-space,indent-with-non-tab,cr-at-eol
+	whitespace = space-before-tab,trailing-space,cr-at-eol,blank-at-eof,blank-at-eol
 	autocrlf = input
 	filemode = true
 	logallrefupdates = true
@@ -27,7 +27,7 @@
 	co = checkout
 	dh = diff HEAD^
 	dm = diff master
-	lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+	lg = log --date=relative --pretty=format:'%Cred%h%Creset %an - %s (%Cgreen%ad%Creset)'
 	sb = status -sb
 	unstage = reset HEAD --
 	st = status
@@ -44,9 +44,3 @@
 
 [rerere]
 	enabled = 1
-
-[log]
-  date = relative
-
-[format]
-    pretty = format:"%Cred%h%Creset %an - %s (%Cgreen%ad%Creset)"
