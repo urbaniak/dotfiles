@@ -33,7 +33,3 @@ activate_virtualenv() {
 		deactivate 2>/dev/null
 	fi
 }
-
-function cd () {
-	builtin cd $@ && activate_virtualenv
-}
