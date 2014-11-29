@@ -8,8 +8,8 @@ if [[ $UID -eq 0 ]]; then
 fi
 
 export CLICOLOR=1
-export LSCOLORS=exfxcxdxbxegedabagacad
-export LS_COLORS="di=34;40:ln=35;40:so=32;40:pi=33;40:ex=31;40:bd=34;46:cd=34;43:su=0;41:sg=0;46:tw=0;42:ow=0;43:"
+export LSCOLORS=ExGxFxDxCxDxDxhbhdacEc
+export LS_COLORS="di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=01;05;37;41:mi=01;05;37;41:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:ex=01;32"
 
 export HISTFILE=$HOME/.history
 export HISTSIZE=100000
@@ -34,6 +34,12 @@ fpath=($fpath ~/.zsh/functions)
 typeset -U fpath
 
 if [[ $- == *i* ]]; then
+	autoload colors; colors;
+
+	if whence dircolors >/dev/null; then
+		alias ls='ls --color'
+	fi
+
 	alias grep='grep --color'
 	alias cls='clear'
 	alias sc='tmux attach'
