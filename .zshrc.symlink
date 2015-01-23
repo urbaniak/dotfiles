@@ -119,7 +119,7 @@ if [[ $- == *i* ]]; then
 
 		vcs_info 2>/dev/null
 
-		activate_virtualenv
+		activate_virtualenv 2>/dev/null
 	}
 
 	setopt prompt_subst
