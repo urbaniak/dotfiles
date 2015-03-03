@@ -23,9 +23,13 @@ activate_virtualenv() {
 	requirements=`upsearch requirements.txt`
 
 	if [ $requirements ]; then
+		pyvenv=`head -n 2 requirements.txt|egrep 'pyvenv|virtualenv'|sed -e 's/# //'|sed -e 's/#//'`
 		hash=`cat $requirements|get_requirements_hash`
+		if [ ! $pyvenv ]; then
+			pyvenv="virtualenv"
+		fi
 		if [ ! -e $HOME/.virtualenvs/$hash ]; then
-			virtualenv --no-site-packages $HOME/.virtualenvs/$hash;
+			`which $pyvenv` $HOME/.virtualenvs/$hash;
 			$HOME/.virtualenvs/$hash/bin/pip install -r $requirements || (rm -rf $HOME/.virtualenvs/$hash && return);
 		fi
 		source $HOME/.virtualenvs/$hash/bin/activate
