@@ -1,0 +1,3 @@
+\set PROMPT1 '%n@%M:%> %/> '
+\set PROMPT2 '> '
+\timing
