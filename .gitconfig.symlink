@@ -14,11 +14,7 @@
 	editor = vim
 
 [branch]
-	autosetupmerge = true
-
-[diff]
-	renames = copies
-	mnemonicprefix = true
+	autosetuprebase = always
 
 [push]
 	default = current
@@ -34,7 +30,6 @@
 	ci = commit
 	br = branch
 	last = log -1 HEAD
-	lol = log --decorate --pretty=oneline --abbrev-commit --all
 	cleanup = !git branch --merged master | grep -v 'master$' | xargs git branch -d
 
 [color]
@@ -42,5 +37,5 @@
 	status = auto
 	branch = auto
 
-[rerere]
-	enabled = 1
+[remote "origin"]
+	fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
