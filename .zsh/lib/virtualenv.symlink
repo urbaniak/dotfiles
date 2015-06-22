@@ -30,6 +30,7 @@ activate_virtualenv() {
 		fi
 		if [ ! -e $HOME/.virtualenvs/$hash ]; then
 			`which $pyvenv` $HOME/.virtualenvs/$hash;
+			$HOME/.virtualenvs/$hash/bin/pip install -U pip setuptools
 			$HOME/.virtualenvs/$hash/bin/pip install -r $requirements || (rm -rf $HOME/.virtualenvs/$hash && return);
 		fi
 		source $HOME/.virtualenvs/$hash/bin/activate
