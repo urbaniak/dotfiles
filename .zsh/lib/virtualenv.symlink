@@ -23,7 +23,7 @@ activate_virtualenv() {
 	requirements=`upsearch requirements.txt`
 
 	if [ $requirements ]; then
-		pyvenv=`head -n 2 requirements.txt|egrep 'pyvenv|virtualenv'|sed -e 's/# //'|sed -e 's/#//'`
+		pyvenv=`head -n 2 requirements.txt|egrep -- 'pyvenv|-m venv|virtualenv'|sed -e 's/# //'|sed -e 's/#//'`
 		hash=`cat $requirements|get_requirements_hash`
 		if [ ! $pyvenv ]; then
 			pyvenv="virtualenv"
