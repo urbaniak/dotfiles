@@ -9,6 +9,5 @@ set -g status-bg default
 set -g status-left '#[default]'
 set -g status-keys vi
 set -g status-right '#[fg=green] #H %H:%M#[default]'
-set -g status-utf8 on
 set -g window-status-current-fg green
 set -ag terminal-overrides ",*:XT@"

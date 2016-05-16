@@ -6,7 +6,6 @@ import os
 import readline
 import rlcompleter
 
-
 if 'libedit' in readline.__doc__:
     readline.parse_and_bind("bind ^I rl_complete")
 else:
@@ -26,3 +25,5 @@ if os.path.exists(history):
 
 atexit.register(save_history)
 del os, atexit, readline, rlcompleter, save_history, history
+
+

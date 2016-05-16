@@ -1,10 +1,11 @@
+#!/bin/zsh
 # ZSH Configuration
 
 export PROMPT='%n@%B%m%b%f> '
 export RPROMPT='${vcs_info_msg_0_}%b%f%~ '
 
 if [[ $UID -eq 0 ]]; then
-	export PROMPT='%m%B%%%b%f '
+    export PROMPT='%m%B%%%b%f '
 fi
 
 export CLICOLOR=1
@@ -34,99 +35,100 @@ fpath=($fpath ~/.zsh/functions)
 typeset -U fpath
 
 if [[ $- == *i* ]]; then
-	autoload colors; colors;
+    autoload colors; colors;
+    autoload -U add-zsh-hook
 
-	if whence dircolors >/dev/null; then
-		alias ls='ls --color'
-	fi
+    if whence dircolors >/dev/null; then
+        alias ls='ls --color'
+    fi
 
-	alias grep='grep --color'
-	alias cls='clear'
-	alias sc='tmux attach'
-	alias mc='mc -d -c'
-	alias mcedit='mcedit -d -c'
+    alias grep='grep --color'
+    alias cls='clear'
+    alias sc='tmux attach'
+    alias mc='mc -d -c'
+    alias mcedit='mcedit -d -c'
 
-	alias delpyc="find . -name '*.pyc' -delete"
-	alias delds="find . -name '.DS_Store' -delete"
+    alias delpyc="find . -name '*.pyc' -delete"
+    alias delds="find . -name '.DS_Store' -delete"
 
-	alias rainbow='for color in {000..255}; do echo -n "\e[38;5;${color}m ${color} \e[0m";	done'
+    alias rainbow='for color in {000..255}; do echo -n "\e[38;5;${color}m ${color} \e[0m";  done'
 
-	autoload compinit
-	compinit -c
+    autoload compinit
+    compinit -c
 
-	zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-	zstyle ':completion::complete:*' use-cache 1
-	zstyle ':completion:*' menu select
+    zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+    zstyle ':completion::complete:*' use-cache 1
+    zstyle ':completion:*' menu select
 
-	setopt nobeep
-	setopt list_packed
-	setopt transient_rprompt
-	setopt hist_ignore_dups
-	setopt hist_find_no_dups
-	setopt hist_ignore_space
-	setopt appendhistory
-	setopt sharehistory
-	setopt incappendhistory
+    setopt nobeep
+    setopt list_packed
+    setopt transient_rprompt
+    setopt hist_ignore_dups
+    setopt hist_find_no_dups
+    setopt hist_ignore_space
+    setopt appendhistory
+    setopt sharehistory
+    setopt incappendhistory
 
-	bindkey '^[[A' up-line-or-search
-	bindkey '^[[B' down-line-or-search
-	bindkey ' ' magic-space
-	bindkey '^K' kill-region
-	bindkey '^A' beginning-of-line
-	bindkey '^E' end-of-line
-	bindkey '^L' clear-screen
-	bindkey '^H' backward-delete-char
-	bindkey '^?' backward-delete-char
-	bindkey '^[[3~' delete-char
-	bindkey '^[[2~' overwrite-mode
+    bindkey '^[[A' up-line-or-search
+    bindkey '^[[B' down-line-or-search
+    bindkey ' ' magic-space
+    bindkey '^K' kill-region
+    bindkey '^A' beginning-of-line
+    bindkey '^E' end-of-line
+    bindkey '^L' clear-screen
+    bindkey '^H' backward-delete-char
+    bindkey '^?' backward-delete-char
+    bindkey '^[[3~' delete-char
+    bindkey '^[[2~' overwrite-mode
 
-	bindkey "\e[H" beginning-of-line
-	bindkey "\e[F" end-of-line
+    bindkey "\e[H" beginning-of-line
+    bindkey "\e[F" end-of-line
 
-	bindkey '\e[7~' beginning-of-line
-	bindkey '\e[8~' end-of-line
+    bindkey '\e[7~' beginning-of-line
+    bindkey '\e[8~' end-of-line
 
-	bindkey '^[[1~' beginning-of-line
-	bindkey '^[[4~' end-of-line
+    bindkey '^[[1~' beginning-of-line
+    bindkey '^[[4~' end-of-line
 
-	bindkey '^[[H' beginning-of-line
-	bindkey '^[[F' end-of-line
+    bindkey '^[[H' beginning-of-line
+    bindkey '^[[F' end-of-line
 
-	bindkey '^[OH' beginning-of-line
-	bindkey '^[OF' end-of-line
-	bindkey '^[O5H' beginning-of-line
-	bindkey '^[O5F' end-of-line
+    bindkey '^[OH' beginning-of-line
+    bindkey '^[OF' end-of-line
+    bindkey '^[O5H' beginning-of-line
+    bindkey '^[O5F' end-of-line
 
-	autoload -Uz vcs_info
+    autoload -Uz vcs_info
 
-	zstyle ':vcs_info:*' stagedstr '%F{28}●'
-	zstyle ':vcs_info:*' unstagedstr '%F{11}●'
-	zstyle ':vcs_info:*' check-for-changes true
-	zstyle ':vcs_info:*' enable git
+    zstyle ':vcs_info:*' stagedstr '%F{28}●'
+    zstyle ':vcs_info:*' unstagedstr '%F{11}●'
+    zstyle ':vcs_info:*' check-for-changes true
+    zstyle ':vcs_info:*' enable git
 
-	for config_file ($HOME/.zsh/lib/*(N)); do
-		source $config_file
-	done
+    for config_file ($HOME/.zsh/lib/*(N)); do
+        source $config_file
+    done
 
-	precmd() {
-		case $TERM in
-			*xterm*|*rxvt*)
-				print -Pn "\e]2;%n@%m:%~\a"
-			;;
-		esac
+    precmd() {
+        case $TERM in
+            *xterm*|*rxvt*)
+                print -Pn "\e]2;%n@%m:%~\a"
+            ;;
+        esac
 
-		zstyle ':vcs_info:*' formats ' %F{green}%b%c%u %F{15}'
+        zstyle ':vcs_info:*' formats ' %F{green}%b%c%u %F{15}'
 
-		vcs_info 2>/dev/null
+        vcs_info 2>/dev/null
 
-		activate_virtualenv 2>/dev/null
-	}
+        activate_virtualenv 2>/dev/null
+    }
 
-	setopt prompt_subst
-	setopt promptsubst
+    setopt prompt_subst
+    setopt promptsubst
 
-	autoload -U promptinit
-	promptinit
+    autoload -U promptinit
+    promptinit
 fi
 
 [[ -e ~/.profile ]] && source ~/.profile

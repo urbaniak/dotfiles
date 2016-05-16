@@ -1,41 +1,52 @@
 [user]
-	name = Krzysztof Urbaniak
-	email = urban@fail.pl
+    name = Krzysztof Urbaniak
+    email = urban@fail.pl
 
 [apply]
-	whitespace = fix
+    whitespace = fix
 
 [core]
-	excludesfile = ~/.gitignore
-	whitespace = space-before-tab,trailing-space,cr-at-eol,blank-at-eof,blank-at-eol
-	autocrlf = input
-	filemode = true
-	logallrefupdates = true
-	editor = vim
+    excludesfile = ~/.gitignore
+    whitespace = space-before-tab,trailing-space,cr-at-eol,blank-at-eof,blank-at-eol
+    autocrlf = input
+    filemode = true
+    logallrefupdates = true
+    editor = vim
 
 [branch]
-	autosetuprebase = always
+    autosetuprebase = always
 
 [push]
-	default = current
+    default = current
 
 [alias]
-	co = checkout
-	dh = diff HEAD^
-	dm = diff master
-	lg = log --date=relative --pretty=format:'%Cred%h%Creset %an - %s (%Cgreen%ad%Creset)'
-	sb = status -sb
-	unstage = reset HEAD --
-	st = status
-	ci = commit
-	br = branch
-	last = log -1 HEAD
-	cleanup = !git branch --merged master | grep -v 'master$' | xargs git branch -d
+    co = checkout
+    dh = diff HEAD^
+    dm = diff master
+    lg = log --date=relative --pretty=format:'%Cred%h%Creset %an - %s (%Cgreen%ad%Creset)'
+    sb = status -sb
+    unstage = reset HEAD --
+    st = status
+    ci = commit
+    br = branch
+    last = log -1 HEAD
+    cleanup = !git branch --merged master | grep -v 'master$' | xargs git branch -d
 
 [color]
-	diff = auto
-	status = auto
-	branch = auto
+    diff = auto
+    status = auto
+    branch = auto
 
 [remote "origin"]
-	fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
+    fetch = +refs/heads/*:refs/remotes/origin/*
+    fetch = +refs/pull/*/head:refs/remotes/origin/pr/*
+
+[credential]
+    helper = osxkeychain
+
+[difftool "Kaleidoscope"]
+    cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+
+[mergetool "Kaleidoscope"]
+    cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+    trustexitcode = true

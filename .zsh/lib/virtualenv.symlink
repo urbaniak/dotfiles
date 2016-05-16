@@ -1,40 +1,40 @@
 #!/bin/bash
 
 get_requirements_hash() {
-	if which sha256sum >/dev/null 2>&1; then
-		shasum="sha256sum"
-	else
-		shasum="shasum -a 256"
-	fi
+    if which sha256sum >/dev/null 2>&1; then
+        shasum="sha256sum"
+    else
+        shasum="shasum -a 256"
+    fi
 
-	grep -ve '^#'|grep -ve '^$'|eval ${shasum}|awk -F ' ' '{print substr($1,0,10)}'
+    grep -ve '^#'|grep -ve '^$'|eval ${shasum}|awk -F ' ' '{print substr($1,0,10)}'
 }
 
 upsearch () {
-	slashes=${PWD//[^\/]/}
-	directory=$PWD
-	for (( n=${#slashes}; n>0; --n )); do
-		test -e $directory/$1 && echo $directory/$1 && return
-		directory=$directory/..
-	done
+    slashes=${PWD//[^\/]/}
+    directory=$PWD
+    for (( n=${#slashes}; n>0; --n )); do
+        test -e $directory/$1 && echo $directory/$1 && return
+        directory=$directory/..
+    done
 }
 
 activate_virtualenv() {
-	requirements=`upsearch requirements.txt`
+    requirements=`upsearch requirements.txt`
 
-	if [ $requirements ]; then
-		pyvenv=`head -n 2 requirements.txt|egrep -- 'pyvenv|-m venv|virtualenv'|sed -e 's/# //'|sed -e 's/#//'`
-		hash=`cat $requirements|get_requirements_hash`
-		if [ ! $pyvenv ]; then
-			pyvenv="virtualenv"
-		fi
-		if [ ! -e $HOME/.virtualenvs/$hash ]; then
-			`which $pyvenv` $HOME/.virtualenvs/$hash;
-			$HOME/.virtualenvs/$hash/bin/pip install --disable-pip-version-check -U pip setuptools wheel
-			$HOME/.virtualenvs/$hash/bin/pip install -r $requirements || (rm -rf $HOME/.virtualenvs/$hash && return);
-		fi
-		source $HOME/.virtualenvs/$hash/bin/activate
-	else
-		deactivate 2>/dev/null
-	fi
+    if [ $requirements ]; then
+        pyvenv=`head -n 2 requirements.txt|egrep -- 'pyvenv|-m venv|virtualenv'|sed -e 's/# //'|sed -e 's/#//'`
+        hash=`cat $requirements|get_requirements_hash`
+        if [ ! $pyvenv ]; then
+            pyvenv="virtualenv"
+        fi
+        if [ ! -e $HOME/.virtualenvs/$hash ]; then
+            eval $pyvenv $HOME/.virtualenvs/$hash;
+            $HOME/.virtualenvs/$hash/bin/pip install --disable-pip-version-check -U pip setuptools wheel
+            $HOME/.virtualenvs/$hash/bin/pip install -r $requirements || (rm -rf $HOME/.virtualenvs/$hash && return);
+        fi
+        source $HOME/.virtualenvs/$hash/bin/activate
+    else
+        deactivate 2>/dev/null
+    fi
 }
