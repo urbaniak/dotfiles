@@ -1,0 +1,9 @@
+from xonsh.environ import git_dirty_working_directory
+
+$PROMPT = '{user}@{WHITE}{hostname}{NO_COLOR}> '
+$RIGHT_PROMPT="{INTENSE_GREEN}{curr_branch}{branch_clean}{NO_COLOR} {cwd} "
+$MULTILINE_PROMPT = ' '
+
+$FORMATTER_DICT['branch_clean'] = lambda: "{YELLOW}●{NO_COLOR}" if git_dirty_working_directory(include_untracked=False) else ''
+
+$XONSH_SHOW_TRACEBACK=True
