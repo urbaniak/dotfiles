@@ -13,9 +13,11 @@ else:
 
 history = os.path.expanduser("~/.pythonhist")
 
+
 def save_history(history=history):
     import readline
     readline.write_history_file(history)
+
 
 if os.path.exists(history):
     try:
@@ -23,7 +25,6 @@ if os.path.exists(history):
     except IOError:
         pass
 
+
 atexit.register(save_history)
 del os, atexit, readline, rlcompleter, save_history, history
-
-

@@ -1,0 +1,72 @@
+#!/bin/bash
+
+if [ ! $VIRTUALENV_HOME ]; then
+    if [ $XDG_CACHE_HOME ]; then
+        VIRTUALENV_HOME=$XDG_CACHE_HOME
+    else
+        VIRTUALENV_HOME=$HOME/.virtualenvs
+    fi
+else
+    VIRTUALENV_HOME=$HOME/.virtualenvs
+fi
+
+get_requirements_hash() {
+    if which sha256sum >/dev/null 2>&1; then
+        shasum="sha256sum"
+    else
+        shasum="shasum -a 256"
+    fi
+
+    eval ${shasum}|awk -F ' ' '{print substr($1,0,10)}'
+}
+
+upsearch() {
+    slashes=${PWD//[^\/]/}
+    directory=$PWD
+    for (( n=${#slashes}; n>0; --n )); do
+        test -e $directory/$1 && echo $directory/$1 && return
+        directory=$directory/..
+    done
+}
+
+activate_virtualenv() {
+    requirements=`upsearch requirements.txt`
+
+    if [ $requirements ]; then
+        req=`cat $requirements|grep -ve '^#'|grep -ve '^$'`
+        ver=`echo $requirements|sed -e 's/requirements.txt/.python-version/'`
+        python_version=`cat $ver` 2>/dev/null
+        hash=`echo $req$python_version|get_requirements_hash`
+        if [ ! -e $VIRTUALENV_HOME/$hash ]; then
+            if [ $python_version ]; then
+                if which "pyvenv-$python_version" >/dev/null 2>&1; then
+                    pyvenv="pyvenv-$python_version"
+                elif which "virtualenv-$python_version" >/dev/null 2>&1; then
+                    pyvenv="virtualenv-$python_version"
+                elif which "pyvenv-${python_version%.*.*}" >/dev/null 2>&1; then
+                    pyvenv="pyvenv-${python_version%.*.*}"
+                elif which "virtualenv-${python_version%.*.*}" >/dev/null 2>&1; then
+                    pyvenv="virtualenv-${python_version%.*.*}"
+                elif which "pyvenv-${python_version%.*}" >/dev/null 2>&1; then
+                    pyvenv="pyvenv-${python_version%.*}"
+                elif which "virtualenv-${python_version%.*}" >/dev/null 2>&1; then
+                    pyvenv="virtualenv-${python_version%.*}"
+                else
+                    pyvenv='virtualenv'
+                fi
+            else
+                pyvenv='virtualenv'
+            fi
+
+            eval $pyvenv $VIRTUALENV_HOME/$hash;
+            $VIRTUALENV_HOME/$hash/bin/pip install --disable-pip-version-check -U pip setuptools wheel
+            $VIRTUALENV_HOME/$hash/bin/pip install -r $requirements
+        fi
+
+        if [ "$VIRTUALENV_HOME/$hash" != "$VIRTUAL_ENV" ]; then
+            source $VIRTUALENV_HOME/$hash/bin/activate
+        fi
+    else
+        deactivate 2>/dev/null
+    fi
+}

@@ -1,0 +1,5 @@
+'.platform-darwin atom-workspace atom-text-editor:not([mini])':
+  'ctrl-shift-L': 'unset!'
+  'shift-cmd-L': 'grammar-selector:show'
+  'cmd-shift-U': 'encoding-selector:show'
+  'cmd-j': 'go-to-line:toggle'

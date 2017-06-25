@@ -28,7 +28,10 @@ unset LC_ALL
 
 export PYTHONSTARTUP=$HOME/.pythonrc.py
 
-path=(~/bin /usr/local/sbin /usr/local/bin /bin /sbin /usr/bin /usr/sbin $path)
+export VIRTUALENV_HOME=$HOME/.virtualenvs
+export WORKON_HOME=$VIRTUALENV_HOME
+
+path=(~/bin /usr/local/sbin /usr/local/bin /usr/bin /usr/sbin  /bin /sbin $path)
 typeset -U path
 
 fpath=($fpath ~/.zsh/functions)
@@ -120,8 +123,6 @@ if [[ $- == *i* ]]; then
         zstyle ':vcs_info:*' formats ' %F{green}%b%c%u %F{15}'
 
         vcs_info 2>/dev/null
-
-        activate_virtualenv 2>/dev/null
     }
 
     setopt prompt_subst

@@ -1,6 +1,7 @@
 [user]
     name = Krzysztof Urbaniak
     email = urban@fail.pl
+    signingkey = 52AF43F99564338C
 
 [apply]
     whitespace = fix
@@ -50,3 +51,6 @@
 [mergetool "Kaleidoscope"]
     cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
     trustexitcode = true
+
+[fetch]
+    prune = true

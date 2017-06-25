@@ -1,0 +1,180 @@
+"*":
+  "autocomplete-python":
+    useKite: false
+    useSnippets: "required"
+  core:
+    allowPendingPaneItems: false
+    disabledPackages: [
+      "open-on-github"
+      "python-autopep8"
+      "linter-ansible-linting"
+      "todo-manager"
+      "ansible-snippets"
+      "seti-icons"
+      "welcome"
+      "metrics"
+      "remote-atom-plus"
+      "atom-bracket-highlight"
+      "bracket-matcher-highlight"
+      "package-generator"
+      "styleguide"
+      "pigments"
+      "sync-settings"
+      "auto-detect-indentation"
+      "language-ansible"
+      "atom-beautify"
+      "yaml-path"
+      "yaml-sortkey"
+      "autosave"
+      "background-tips"
+      "git-control"
+      "linter-pyflakes"
+      "python-jedi"
+      "linter-python"
+      "hyperclick"
+      "archive-view"
+      "tool-bar"
+      "git-plus"
+      "django-atom"
+      "django-templates"
+      "js-hyperclick"
+      "language-django"
+      "simply-django-atom"
+      "exception-reporting"
+      "language-rust"
+      "linter-gcc"
+      "whitespace"
+      "linter-python-pep8"
+      "linter-python-pyflakes"
+      "python-yapf"
+      "atom-python-test"
+      "python-isort"
+      "autocomplete-clang"
+      "python-debugger"
+      "linter-rust"
+      "bookmarks"
+      "linter-pylama"
+      "merge-conflicts"
+      "minimap"
+      "busy-signal"
+      "git-blame"
+      "file-icons"
+      "github"
+      "platformio-ide"
+      "platformio-ide-debugger"
+      "build"
+      "Hydrogen"
+      "indentation-indicator"
+    ]
+    excludeVcsIgnoredPaths: false
+    ignoredNames: [
+      ".git"
+      ".hg"
+      ".svn"
+      ".DS_Store"
+      "._*"
+      "node_modules"
+      "*.pyc"
+      "*.pyo"
+      "__pycache__"
+      ".cache"
+      ".venv"
+      ".virtualenv"
+      ".pioenvs"
+      ".piolibdeps"
+      ".clang_complete"
+      ".gcc-flags.json"
+    ]
+    packagesWithKeymapsDisabled: [
+      "grammar-selector"
+    ]
+    projectHome: "/Users/urban/Development"
+    telemetryConsent: "no"
+    titleBar: "custom"
+    warnOnLargeFileLimit: 0.5
+  editor:
+    fontFamily: "Menlo"
+    fontSize: 13
+    preferredLineLength: 120
+    scrollSensitivity: 90
+    showIndentGuide: true
+    showInvisibles: true
+    tabLength: 4
+  "exception-reporting":
+    userId: "dea08ef1-8ecd-9169-5867-4e430b1c8390"
+  "file-icons":
+    coloured: false
+  "fuzzy-finder": {}
+  "indentation-indicator":
+    indicatorPosition: "right"
+  kite:
+    showKiteTourOnStatup: false
+  linter: {}
+  "linter-flake8":
+    flakeErrors: true
+    maxLineLength: 120
+    selectErrors: [
+      "E"
+      "W"
+    ]
+  "linter-pep8":
+    maxLineLength: 120
+  "linter-ui-default":
+    panelHeight: 70
+    showStatusBar: false
+  minimap: {}
+  "nord-atom-ui": {}
+  "one-dark-ui":
+    tabSizing: "Even"
+  "package-sync":
+    createOnChange: true
+    forceOverwrite: true
+  "platformio-ide":
+    autoCloseSerialMonitor: false
+    autoUpdateIDE: false
+    showHomeScreen: false
+    showPIOHome: false
+  "platformio-ide-terminal":
+    core:
+      autoRunCommand: ""
+    style:
+      animationSpeed: 4
+      fontFamily: "Menlo"
+      fontSize: "12"
+      theme: "dracula"
+  "remote-atom":
+    keep_alive: true
+    launch_at_startup: true
+  "remote-atom-plus":
+    keep_alive: true
+    launch_at_startup: true
+  "status-bar": {}
+  tabs: {}
+  "tool-bar":
+    position: "Left"
+    visible: false
+  "tree-view":
+    hideIgnoredNames: true
+    squashDirectoryNames: true
+  welcome:
+    showOnStartup: false
+  whitespace:
+    ignoreWhitespaceOnCurrentLine: false
+".console.python.text":
+  editor:
+    preferredLineLength: 120
+    tabLength: 4
+".editorconfig.source":
+  editor:
+    preferredLineLength: 120
+    tabLength: 4
+".python.regexp.source":
+  editor:
+    preferredLineLength: 120
+".python.source":
+  editor:
+    preferredLineLength: 120
+".python.text.traceback":
+  editor:
+    preferredLineLength: 120
+    tabLength: 4
