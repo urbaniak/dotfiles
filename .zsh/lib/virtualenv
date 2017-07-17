@@ -38,24 +38,21 @@ activate_virtualenv() {
         python_version=`cat $ver` 2>/dev/null
         hash=`echo $req$python_version|get_requirements_hash`
         if [ ! -e $VIRTUALENV_HOME/$hash ]; then
+            pyvenv='virtualenv'
             if [ $python_version ]; then
-                if which "pyvenv-$python_version" >/dev/null 2>&1; then
-                    pyvenv="pyvenv-$python_version"
+                if which "python$python_version" >/dev/null 2>&1 && [ "${python_version%.*}" = "3" ]; then
+                    pyvenv="python$python_version -m venv"
+                elif which "python${python_version%.*.*}" >/dev/null 2>&1 && [ "${python_version%.*}" = "3" ]; then
+                    pyvenv="python${python_version%.*.*} -m venv"
+                elif which "python${python_version%.*}" >/dev/null 2>&1 && [ "${python_version%.*}" = "3" ]; then
+                    pyvenv="python${python_version%.*} -m venv"
                 elif which "virtualenv-$python_version" >/dev/null 2>&1; then
                     pyvenv="virtualenv-$python_version"
-                elif which "pyvenv-${python_version%.*.*}" >/dev/null 2>&1; then
-                    pyvenv="pyvenv-${python_version%.*.*}"
                 elif which "virtualenv-${python_version%.*.*}" >/dev/null 2>&1; then
                     pyvenv="virtualenv-${python_version%.*.*}"
-                elif which "pyvenv-${python_version%.*}" >/dev/null 2>&1; then
-                    pyvenv="pyvenv-${python_version%.*}"
                 elif which "virtualenv-${python_version%.*}" >/dev/null 2>&1; then
                     pyvenv="virtualenv-${python_version%.*}"
-                else
-                    pyvenv='virtualenv'
                 fi
-            else
-                pyvenv='virtualenv'
             fi
 
             eval $pyvenv $VIRTUALENV_HOME/$hash;
